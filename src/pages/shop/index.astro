@@ -1,0 +1,58 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CategoryCard from '../../components/CategoryCard.astro';
+import ProductCard from '../../components/ProductCard.astro'
+
+// You'd typically fetch these from a database/CMS
+const categories = [
+  {
+    name: 'Electronics',
+    image: '/images/electronics.jpg',
+    description: 'Latest gadgets and tech accessories',
+    slug: 'electronics'
+  },
+  {
+    name: 'Clothing',
+    image: '/images/clothing.jpg',
+    description: 'Trendy and comfortable apparel',
+    slug: 'clothing'
+  }
+];
+
+// Featured products data
+const featuredProducts = [
+  {
+    name: 'Premium Product',
+    price: 99.99,
+    image: '/images/product1.jpg',
+    slug: 'premium-product',
+    category: 'electronics'
+  }
+];
+---
+
+<Layout title="Shop - Browse Our Categories">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Welcome to Our Shop</h1>
+      <p class="text-lg text-gray-600">Browse our collection across various categories</p>
+    </div>
+
+    <!-- Categories Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {categories.map((category) => (
+        <CategoryCard {...category} />
+      ))}
+    </div>
+
+    <!-- Featured Products -->
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8">Featured Products</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {featuredProducts.map((product) => (
+          <ProductCard {...product} />
+        ))}
+      </div>
+    </section>
+  </main>
+</Layout>

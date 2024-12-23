@@ -1,11 +1,64 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Your product data here
+const products = [
+  {
+    title: "Product 1",
+    price: 99.99,
+    image: "/products/product1.jpg"
+  },
+  // ... more products
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Your Store">
+  <!-- Hero Section -->
+  <section class="mb-16">
+    <div class="relative h-[500px] rounded-3xl overflow-hidden mb-16">
+      <div class="absolute inset-0 bg-gray-100 dark:bg-gray-800">
+        <!-- Your hero content -->
+        <div class="relative z-10 h-full flex items-center justify-center text-center">
+          <div class="bg-black/70 backdrop-blur-sm p-8 rounded-2xl">
+            <h1 class="font-permanent text-5xl text-white mb-2 [text-shadow:_2px_2px_0_var(--tw-shadow-color)] shadow-primary-500">
+              Welcome to Our Store
+            </h1>
+            <p class="font-permanent text-2xl text-white [text-shadow:_1px_1px_0_var(--tw-shadow-color)] shadow-primary-500">
+              Discover Amazing Products
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Grid -->
+  <!-- <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 px-4">
+    {products.map(product => (
+      <ProductCard
+        title={product.title}
+        price={product.price}
+        image={product.image}
+      />
+    ))}
+  </section> -->
+
+  <!-- Contact Section -->
+  <section class="bg-gray-100 dark:bg-gray-800 rounded-3xl mt-16 py-16 px-8 text-center">
+    <h2 class="font-permanent text-4xl text-primary-500 mb-8">Get In Touch</h2>
+    <div class="flex flex-wrap justify-center gap-8 max-w-4xl mx-auto">
+      <a href="/contact" class="btn-primary min-w-[200px]">
+        Contact Us
+      </a>
+      <a href="tel:+1234567890" class="btn-primary min-w-[200px]">
+        Call Now
+      </a>
+      <a href="mailto:info@example.com" class="btn-primary min-w-[200px]">
+        Email Us
+      </a>
+    </div>
+  </section>
 </Layout>
+
+

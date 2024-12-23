@@ -1,0 +1,69 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import product from '../../../../assets/product-image.jpg';
+
+export async function getStaticPaths() {
+  // You'd fetch this from your backend
+  return [
+    {
+      params: { 
+        category: 'electronics',
+        product: 'wireless-earbuds'
+      },
+      props: {
+        name: 'Wireless Earbuds',
+        price: 79.99,
+        description: 'High-quality wireless earbuds with noise cancellation.',
+        images: ['/images/earbuds-1.jpg', '/images/earbuds-2.jpg'],
+        specs: ['Bluetooth 5.0', '24hr Battery Life', 'Noise Cancellation']
+      }
+    }
+  ];
+}
+
+const { name, price, description, images, specs } = Astro.props;
+---
+
+<Layout title={name}>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Product Images -->
+      <div class="space-y-4">
+        <img 
+          src={images[0]} 
+          alt={name}
+          class="w-full rounded-lg"
+        />
+        <div class="grid grid-cols-4 gap-4">
+          {images.map((image) => (
+            <img 
+              src={image} 
+              alt={name}
+              class="w-full rounded-lg cursor-pointer hover:opacity-75"
+            />
+          ))}
+        </div>
+      </div>
+
+      <!-- Product Info -->
+      <div>
+        <h1 class="text-3xl font-bold mb-4">{name}</h1>
+        <p class="text-2xl text-gray-900 mb-6">${price}</p>
+        <div class="prose max-w-none mb-6">
+          <p>{description}</p>
+        </div>
+        
+        <h2 class="text-xl font-semibold mb-4">Specifications</h2>
+        <ul class="list-disc pl-5 mb-6">
+          {specs.map((spec) => (
+            <li>{spec}</li>
+          ))}
+        </ul>
+
+        <button class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700">
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </main>
+</Layout>

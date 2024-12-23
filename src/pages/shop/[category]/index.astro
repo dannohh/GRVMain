@@ -1,0 +1,53 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ProductCard from '../../../components/ProductCard.astro';
+
+export async function getStaticPaths() {
+  // You'd typically fetch these from your backend
+  return [
+    {
+      params: { category: 'electronics' },
+      props: {
+        products: [
+          {
+            name: 'Wireless Earbuds',
+            price: 79.99,
+            image: '/images/earbuds.jpg',
+            slug: 'wireless-earbuds',
+            category: 'electronics'
+          }
+        ]
+      }
+    },
+    {
+      params: { category: 'clothing' },
+      props: {
+        products: [
+          {
+            name: 'Cotton T-Shirt',
+            price: 24.99,
+            image: '/images/tshirt.jpg',
+            slug: 'cotton-tshirt',
+            category: 'clothing'
+          }
+        ]
+      }
+    }
+  ];
+}
+
+const { category } = Astro.params;
+const { products } = Astro.props;
+---
+
+<Layout title={`${category.charAt(0).toUpperCase() + category.slice(1)} - Shop`}>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl font-bold mb-8 capitalize">{category}</h1>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {products.map((product) => (
+        <ProductCard {...product} />
+      ))}
+    </div>
+  </main>
+</Layout>
